@@ -1,4 +1,15 @@
 #app.py
+import streamlit as st
+from streamlit_gsheets import GSheetsConnection
+
+# Initialize the connection
+conn = st.connection("gsheets", type=GSheetsConnection)
+
+# Read the leads from your sheet
+df = conn.read(ttl="1m") # Refresh every minute
+
+st.write("### Current Leads from Google Sheets")
+st.dataframe(df)
 
 import streamlit as st
 from crewai import LLM
